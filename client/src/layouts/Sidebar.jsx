@@ -16,7 +16,7 @@ const links = [
   { to: '/', label: 'Overview', icon: LayoutDashboard, end: true },
   { to: '/detect', label: 'Mineral Identification', icon: ScanSearch },
   { to: '/weighbridge', label: 'Weighbridge AI', icon: Truck },
-  { to: '/compare', label: 'Compare Samples', icon: GitCompareArrows },
+  // { to: '/compare', label: 'Compare Samples', icon: GitCompareArrows },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
   // { to: '/history', label: 'Prediction History', icon: HistoryIcon },
   // { to: '/model', label: 'Model Management', icon: Box, admin: true },

@@ -22,18 +22,18 @@ import { applyTheme } from '../services/theme'
 
 const PaletteContext = createContext(null)
 export function useCommandPalette() {
-  return useContext(PaletteContext) || { open: false, setOpen: () => {} }
+  return useContext(PaletteContext) || { open: false, setOpen: () => { } }
 }
 
 const ROUTES = [
   { label: 'Overview', to: '/', icon: LayoutDashboard, kw: 'home dashboard' },
   { label: 'Identify Mineral', to: '/detect', icon: ScanSearch, kw: 'detect predict upload' },
-  { label: 'Compare Samples', to: '/compare', icon: GitCompareArrows, kw: 'compare two' },
+  // { label: 'Compare Samples', to: '/compare', icon: GitCompareArrows, kw: 'compare two' },
   { label: 'Analytics', to: '/analytics', icon: BarChart3, kw: 'charts trends' },
-  { label: 'Prediction History', to: '/history', icon: HistoryIcon, kw: 'log records' },
-  { label: 'Model Management', to: '/model', icon: Box, kw: 'swap upload model' },
-  { label: 'API Health', to: '/health', icon: Activity, kw: 'status uptime' },
-  { label: 'Settings', to: '/settings', icon: SettingsIcon, kw: 'preferences config' }
+  // { label: 'Prediction History', to: '/history', icon: HistoryIcon, kw: 'log records' },
+  // { label: 'Model Management', to: '/model', icon: Box, kw: 'swap upload model' },
+  // { label: 'API Health', to: '/health', icon: Activity, kw: 'status uptime' },
+  // { label: 'Settings', to: '/settings', icon: SettingsIcon, kw: 'preferences config' }
 ]
 
 export function CommandPaletteProvider({ children }) {
@@ -116,7 +116,7 @@ export function CommandPaletteProvider({ children }) {
                       <Item icon={ScanSearch} onSelect={() => run(() => navigate('/detect'))}>
                         Identify a sample
                       </Item>
-                      <Item icon={GitCompareArrows} onSelect={() => run(() => navigate('/compare'))}>
+                      {/* <Item icon={GitCompareArrows} onSelect={() => run(() => navigate('/compare'))}>
                         Compare samples
                       </Item>
                       <Item icon={Sun} onSelect={() => run(() => setTheme('light'))}>
@@ -124,7 +124,7 @@ export function CommandPaletteProvider({ children }) {
                       </Item>
                       <Item icon={Moon} onSelect={() => run(() => setTheme('dark'))}>
                         Switch to dark theme
-                      </Item>
+                      </Item> */}
                       <Item
                         icon={Keyboard}
                         onSelect={() => run(() => window.dispatchEvent(new CustomEvent('mv:shortcuts')))}

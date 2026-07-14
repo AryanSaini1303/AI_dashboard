@@ -23,7 +23,7 @@ export default function Login() {
   const location = useLocation()
   const expired = new URLSearchParams(location.search).get('expired') === '1'
 
-  const [email, setEmail] = useState('demo@mineralvision.ai')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [touched, setTouched] = useState({})
   const [error, setError] = useState('')
@@ -68,10 +68,10 @@ export default function Login() {
         <CrystalHero size={260} />
         <div className="text-center mt-8 px-10">
           <h2 className="font-display text-3xl font-semibold">
-            Mineral<span className="text-amethyst">Vision</span>
+            RYM'S AI-<span className="text-amethyst">LAB</span>
           </h2>
           <p className="text-sm text-quartz/60 mt-2 max-w-xs mx-auto">
-            AI-powered mineral identification — upload a sample, get a confident classification in milliseconds.
+            A centralized AI operations platform delivering real-time analysis, intelligent insights, and seamless model management across your entire workflow.
           </p>
         </div>
       </div>
@@ -92,9 +92,8 @@ export default function Login() {
               <button
                 key={m}
                 onClick={() => { setMode(m); setError('') }}
-                className={`relative flex-1 py-2 text-sm font-medium rounded z-10 transition-colors ${
-                  mode === m ? 'text-base' : 'text-quartz/60 hover:text-quartz'
-                }`}
+                className={`relative flex-1 py-2 text-sm font-medium rounded z-10 transition-colors ${mode === m ? 'text-base' : 'text-quartz/60 hover:text-quartz'
+                  }`}
               >
                 {m === 'login' ? 'Log in' : 'Create account'}
               </button>
@@ -131,9 +130,8 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => setTouched((t) => ({ ...t, email: true }))}
-                  className={`w-full bg-base border rounded pl-9 pr-3 py-2 text-sm outline-none transition-colors ${
-                    touched.email && !emailValid ? 'border-garnet' : 'border-base-line focus:border-amethyst'
-                  }`}
+                  className={`w-full bg-base border rounded pl-9 pr-3 py-2 text-sm outline-none transition-colors ${touched.email && !emailValid ? 'border-garnet' : 'border-base-line focus:border-amethyst'
+                    }`}
                 />
               </div>
               <p className="h-4 text-xs text-garnet mb-2">{touched.email && !emailValid ? 'Enter a valid email address' : ''}</p>
@@ -178,12 +176,12 @@ export default function Login() {
             </motion.form>
           </AnimatePresence>
 
-          <div className="facet-sm border border-base-line bg-base-raised/40 p-3 mt-5 text-xs text-quartz/50 flex gap-2">
+          {/* <div className="facet-sm border border-base-line bg-base-raised/40 p-3 mt-5 text-xs text-quartz/50 flex gap-2">
             <Info size={14} className="text-amethyst shrink-0 mt-0.5" />
             {demo
               ? 'Backend unreachable — running in demo mode with simulated data.'
               : "If the backend isn't running, sign-in is simulated and the dashboard opens in demo mode."}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

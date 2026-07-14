@@ -10,10 +10,10 @@ const titles = {
   '/detect': ['Identify Mineral', 'Upload a sample image and run live inference'],
   '/compare': ['Compare Samples', 'Run two images through the model side by side'],
   '/analytics': ['Analytics', 'Trends across predictions, minerals and accuracy'],
-  '/history': ['Prediction History', 'Every inference the platform has recorded'],
-  '/model': ['Model Management', 'Swap the active model without touching the frontend'],
-  '/health': ['API Health', 'Live status of the inference service'],
-  '/settings': ['Settings', 'Preferences for this workspace']
+  // '/history': ['Prediction History', 'Every inference the platform has recorded'],
+  // '/model': ['Model Management', 'Swap the active model without touching the frontend'],
+  // '/health': ['API Health', 'Live status of the inference service'],
+  // '/settings': ['Settings', 'Preferences for this workspace']
 }
 
 export default function DashboardLayout() {

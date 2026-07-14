@@ -75,12 +75,12 @@ export default function Analytics() {
 
   return (
     <div className="space-y-4 max-w-[1400px]">
-      <div className="flex items-center justify-between">
+      {/* <div className="flex items-center justify-between">
         <p className="text-sm text-quartz/50 inline-flex items-center gap-2"><Calendar size={15} /> Showing {RANGES.find((r) => r.id === range)?.label.toLowerCase()}</p>
         {rangeControl}
-      </div>
+      </div> */}
 
-      <Stagger className="grid grid-cols-1 lg:grid-cols-6 gap-4">
+      <Stagger className="grid grid-cols-1 lg:grid-cols-7 gap-4">
         {/* Hero: accuracy trend with model-swap annotation + brush */}
         <Rise className="lg:col-span-4">
           <Panel title="Accuracy trend" className="h-full">
@@ -103,7 +103,7 @@ export default function Analytics() {
         </Rise>
 
         {/* Distribution donut with direct labels */}
-        <Rise className="lg:col-span-2">
+        <Rise className="lg:col-span-3">
           <Panel title="Distribution" className="h-full">
             <ResponsiveContainer width="100%" height={260}>
               <PieChart>
@@ -136,7 +136,7 @@ export default function Analytics() {
         </Rise>
 
         {/* Daily */}
-        <Rise className="lg:col-span-3">
+        <Rise className="lg:col-span-4">
           <Panel title="Daily predictions" className="h-full">
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={dailyPredictions}>
@@ -151,7 +151,7 @@ export default function Analytics() {
         </Rise>
 
         {/* Activity heatmap full width */}
-        <Rise className="lg:col-span-6">
+        <Rise className="lg:col-span-7">
           <Panel title="Prediction activity">
             <ActivityHeatmap data={dailyPredictions} weeks={20} />
           </Panel>

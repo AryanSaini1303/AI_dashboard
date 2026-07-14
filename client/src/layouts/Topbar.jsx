@@ -33,7 +33,7 @@ export default function Topbar({ title, subtitle, onMenuClick }) {
   const [bellOpen, setBellOpen] = useState(false)
   const bellRef = useRef(null)
 
-  const email = user?.email || 'demo@mineralvision.ai'
+  const email = user?.email || ''
   const initials = email.slice(0, 2).toUpperCase()
   const badge = roleBadge(user?.role)
 
