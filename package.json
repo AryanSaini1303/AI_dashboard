@@ -1,0 +1,18 @@
+{
+  "name": "mineralvision",
+  "private": true,
+  "version": "1.0.0",
+  "description": "MineralVision — one-command launcher for client + server + ml-service",
+  "scripts": {
+    "start": "concurrently -k -n ML,API,WEB -c magenta,cyan,green \"npm run start:ml\" \"npm run start:api\" \"npm run start:web\"",
+    "dev": "npm start",
+    "start:ml": "cd ml-service && .\\venv\\Scripts\\python.exe -m uvicorn app:app --host 0.0.0.0 --port 8000 --reload",
+    "start:api": "npm --prefix server run dev",
+    "start:web": "npm --prefix client run dev",
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "setup:ml": "cd ml-service && python -m venv venv && venv\\Scripts\\python -m pip install -r requirements.txt"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

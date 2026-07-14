@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   MineralVision design foundation
+   Tokens (color/type) live in tailwind.config.js — this file adds
+   the crystalline *material* (cut glass, light-catch, depth), motion
+   choreography, and the reusable state primitives (skeleton, mesh).
+   ============================================================ */
+
+:root {
+  /* Motion tokens */
+  --mv-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --mv-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --mv-t-hover: 150ms;
+  --mv-t-panel: 250ms;
+  --mv-t-page: 400ms;
+
+  /* Elevation shadows built on the stone palette */
+  --mv-elev-1: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --mv-elev-2: 0 8px 22px -6px rgba(0, 0, 0, 0.6);
+  --mv-elev-3: 0 20px 54px -12px rgba(0, 0, 0, 0.7);
+  --mv-glow-amethyst: 0 0 0 1px rgba(200, 107, 60, 0.4), 0 10px 34px -8px rgba(200, 107, 60, 0.5);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #3A322C;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4C4139;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- Faceted geometry ---------- */
+.facet {
+  clip-path: polygon(
+    0 14px, 14px 0,
+    100% 0,
+    100% calc(100% - 14px), calc(100% - 14px) 100%,
+    0 100%
+  );
+}
+
+.facet-sm {
+  clip-path: polygon(
+    0 8px, 8px 0,
+    100% 0,
+    100% calc(100% - 8px), calc(100% - 8px) 100%,
+    0 100%
+  );
+}
+
+.facet-lg {
+  clip-path: polygon(
+    0 22px, 22px 0,
+    100% 0,
+    100% calc(100% - 22px), calc(100% - 22px) 100%,
+    0 100%
+  );
+}
+
+/* ---------- Cut-glass material ----------
+   A layered surface: base panel + top-left light-catch edge + soft inner
+   depth. The `.glass` class wraps `.facet` cards to make them read as cut
+   stone rather than flat clipped boxes. */
+.glass {
+  position: relative;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 42%),
+    #1F1B18;
+  box-shadow: var(--mv-elev-2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: box-shadow var(--mv-t-panel) var(--mv-ease-out),
+              transform var(--mv-t-panel) var(--mv-ease-out);
+}
+
+/* Thin near-white light catch on the upper-left cut edge */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(243, 234, 224, 0.5), transparent 18%);
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  clip-path: inherit;
+}
+
+.glass-hover:hover {
+  box-shadow: var(--mv-elev-3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Specular sweep — a faint band of light crossing the surface on hover,
+   like light catching a gem facet. */
+.specular {
+  position: relative;
+  overflow: hidden;
+}
+.specular::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(243, 234, 224, 0.12),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 650ms var(--mv-ease-out);
+  pointer-events: none;
+}
+.specular:hover::after {
+  left: 130%;
+}
+
+html.light .glass {
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 42%),
+    #FFFFFF;
+  box-shadow: 0 6px 18px -8px rgba(60, 50, 40, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+html.light .glass::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), transparent 18%);
+}
+
+/* ---------- Backgrounds ---------- */
+.crystal-bg {
+  background-image:
+    linear-gradient(135deg, rgba(200, 107, 60, 0.07) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(200, 107, 60, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+/* Atmospheric mesh gradient for hero moments (login, high-confidence result) */
+.mesh-amethyst {
+  background:
+    radial-gradient(60% 60% at 20% 20%, rgba(200, 107, 60, 0.26), transparent 70%),
+    radial-gradient(50% 50% at 85% 30%, rgba(74, 120, 86, 0.14), transparent 70%),
+    radial-gradient(55% 55% at 60% 90%, rgba(224, 164, 88, 0.18), transparent 70%);
+}
+
+/* ---------- Skeleton shimmer ---------- */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #2A2420;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(243, 234, 224, 0.07),
+    transparent
+  );
+  animation: mv-shimmer 1.4s infinite;
+}
+@keyframes mv-shimmer {
+  100% { transform: translateX(100%); }
+}
+html.light .skeleton { background: #E4DED2; }
+html.light .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+
+/* ---------- Motion utilities ---------- */
+@keyframes mv-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-rise {
+  animation: mv-rise var(--mv-t-page) var(--mv-ease-out) both;
+}
+
+@keyframes mv-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade {
+  animation: mv-fade var(--mv-t-panel) var(--mv-ease-out) both;
+}
+
+@keyframes mv-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(74, 120, 86, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(74, 120, 86, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 120, 86, 0); }
+}
+.pulse-live {
+  animation: mv-pulse-ring 2s infinite;
+}
+
+/* ---------- Focus states ---------- */
+:focus-visible {
+  outline: 2px solid #C86B3C;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .specular::after { display: none; }
+}
+
+/* ---------- Light theme surface overrides ---------- */
+html.light body {
+  background: #F5EFE6;
+  color: #1F1B18;
+}
+html.light .bg-base { background-color: #F5EFE6 !important; }
+html.light .bg-base-panel { background-color: #FFFFFF !important; }
+html.light .bg-base-raised { background-color: #EEE5D8 !important; }
+html.light .border-base-line { border-color: #DCD0BE !important; }
+html.light .bg-base-line { background-color: #DCD0BE !important; }
+html.light .text-quartz { color: #1F1B18 !important; }
+html.light .text-quartz\/70 { color: rgba(31, 27, 24, 0.7) !important; }
+html.light .text-quartz\/60 { color: rgba(31, 27, 24, 0.6) !important; }
+html.light .text-quartz\/50 { color: rgba(31, 27, 24, 0.55) !important; }
+html.light .text-quartz\/40 { color: rgba(31, 27, 24, 0.45) !important; }
+html.light .text-quartz\/30 { color: rgba(31, 27, 24, 0.35) !important; }
+html.light .text-base { color: #F5EFE6 !important; }
+html.light ::-webkit-scrollbar-thumb { background: #D2C4AC; background-clip: content-box; }
+html.light .crystal-bg {
+  background-image:
+    linear-gradient(135deg, rgba(200, 107, 60, 0.1) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(200, 107, 60, 0.06) 1px, transparent 1px);
+}
+
+/* Theme cross-fade */
+html {
+  transition: background-color var(--mv-t-panel) var(--mv-ease-out);
+}
+
+/* Safe-area insets for notched devices / PWA */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+venv/
+__pycache__/
+*.pyc
+uploads/*
+!uploads/.gitkeep
+reports/*
+!reports/.gitkeep
+ml-service/model/*.h5
+ml-service/model/*.pt
+ml-service/model/*.pth
+ml-service/model/*.onnx
